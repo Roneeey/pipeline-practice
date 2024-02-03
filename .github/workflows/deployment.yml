@@ -41,6 +41,6 @@ jobs:
       - name: NPM install
         run: npm ci
       - name: Build website
-        run: |
-          npm run build
-          npm run preview
+        run: npm run build
+      - name: Preview website
+        run: npm run preview
