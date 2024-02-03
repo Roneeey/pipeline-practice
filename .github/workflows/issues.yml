@@ -4,5 +4,8 @@ jobs:
   output-github-context:
     runs-on: ubuntu-latest
     steps:
-      - name: output
-        run: echo "${{ toJSON(github) }}"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print GitHub Context
+        run: echo "${{ toJson(github) }}"
