@@ -1,0 +1,44 @@
+name: Deploy Website
+on: pull_request
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: NPM install
+        run: npm ci
+      - name: Lint test
+        run: npm run lint
+  unit-tests:
+    needs: lint-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: NPM install
+        run: npm ci
+      - name: Unit tests
+        run: npm run test
+  Build-preview:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: NPM install
+        run: npm ci
+      - name: Build website
+        run: npm run build
